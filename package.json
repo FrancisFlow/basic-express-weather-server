@@ -1,0 +1,14 @@
+{
+  "name": "weatherproject",
+  "version": "1.0.0",
+  "description": "A weather app consuming open weather api",
+  "main": "app.js",
+  "scripts": {
+    "test": "check this"
+  },
+  "author": "Francis Ngigi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
