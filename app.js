@@ -1,12 +1,29 @@
 const express = require('express')
 const { json } = require('express/lib/response')
 const https= require('https')
-
+const bodyParser = require('body-parser')
 const app = express()
+app.use(bodyParser.urlencoded({ extended: true }))
+
 
 app.get('/', (req, res) => {
 
-   const url='https://api.openweathermap.org/data/2.5/weather?appid=c70a03a8f101da2f8e0ae56406c06a03&units=metric&q=Nairobi'
+res.sendFile(__dirname + '/index.html')
+
+    
+
+
+
+    
+})
+app.post('/', (req, res) => {
+    apiKey="c70a03a8f101da2f8e0ae56406c06a03"
+    query=req.body.cityName
+
+    const url=`https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&units=metric&q=${query}`
+
+
+
 
     https.get(url, (response) => {
         console.log('Status code :' + response.statusCode);
@@ -23,17 +40,13 @@ app.get('/', (req, res) => {
         
         
             
-            res.write(`<h1> The temperature in Nairobi is ${temp} degrees Celsius. </h1> <h2>The weather in Nairobi is ${weather_description}</h2>`);
+            res.write(`<h1> The temperature in ${query} is ${temp} degrees Celsius. </h1> <h2>The weather description for ${query} is ${weather_description}</h2>`);
             res.write(`<img src=${icon_url} >`);
             res.send();
         })
     });
 
-
-
-    
 })
-
 
 
 app.listen(3000, ()=>{
